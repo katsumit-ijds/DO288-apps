@@ -112,7 +112,7 @@ pipeline {
                     openshift.withCluster() {
                         openshift.tag("${DEV_PROJECT}/books:latest", "${STAGE_PROJECT}/books:stage")
                     }
-                } 
+                }
             }
         }
 
