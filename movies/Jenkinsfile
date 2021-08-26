@@ -93,8 +93,6 @@ pipeline {
             //TODO: Watch deployment until pod is in 'Running' state
             steps {
                     script {
-                        routeHost = readFile('routehost').trim()
-
                         openshift.withCluster() {
                             openshift.withProject( "${DEV_PROJECT}" ) {
                                 def deployment = openshift.selector("dc", "${APP_NAME}").rollout()
@@ -102,7 +100,6 @@ pipeline {
                                     return (it.object().status.phase == "Running")
                                 }
                             }
-                            echo "Deployment to DEV env is complete. Access the API endpoint at the URL http://${routeHost}/movies."
                         }
                     }
             }
